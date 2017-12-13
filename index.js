@@ -39,23 +39,31 @@ app.post("/api/favorite-things", (req, res) => {
     })
 })
 
-app.put("api/favorite-things/increase-rank/:id", (req, res) => {
-  let currentRank
-  FavoriteThing.findById(req.params._id)
+app.put("/api/favorite-things/increase-rank/:id", (req, res) => {
+  let currentRank = 0
+  FavoriteThing.findById(req.params.id)
     .then(favoriteThing => {
+      console.log(`old item: ${favoriteThing.description}`)
       currentRank = favoriteThing.rank
+      higherRank = (currentRank - 1)
+      console.log(`higher rank: ${higherRank}`)
       FavoriteThing.findOneAndUpdate(
-        { rank: currentRank + 1 },
-        { rank: currentRank },
+        {rank: higherRank },
+        {rank: currentRank},
+        {new: true}
+      )
+    .then((updatedRecord) => {
+      console.log(updatedRecord)
+      FavoriteThing.findOneAndUpdate(
+        { _id: req.params.id },
+        { rank: higherRank },
         { new: true }
       )
-    })
-    .then(() => {
-      FavoriteThing.findOneAndUpdate(
-        { id: req.params._id },
-        { rank: currentRank + 1 },
-        { new: true }
-      )
+    .then((updatedRecord) => {
+      console.log(updatedRecord)}
+    )})})
+    .catch((err) => {
+      console.log(err)
     })
 })
 
