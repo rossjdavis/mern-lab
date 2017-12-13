@@ -11,7 +11,7 @@ app.use(parser.json())
 app.use(cors())
 
 app.get("/api/favorite-things", (req, res) => {
-  FavoriteThing.find()
+  FavoriteThing.find().sort('rank')
     .then(favoriteThings => {
       res.json(favoriteThings)
     })
