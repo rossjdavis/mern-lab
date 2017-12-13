@@ -21,14 +21,25 @@ app.get("/api/favorite-things", (req, res) => {
 })
 
 app.post("/api/favorite-things", (req, res) => {
-  FavoriteThing.create(req.body)
-    .then(favoriteThing => {
-      res.json(favoriteThing)
+  console.log(req.body)
+  FavoriteThing.count({})
+    .then(count => {
+      console.log(count)
+      FavoriteThing.create({
+        description: req.body.description,
+        url: req.body.url,
+        image_url: req.body.image_url,
+        rank: count + 1
+      }).then(favoriteThing => {
+        res.status(200).json(favoriteThing)
+      })
     })
     .catch(err => {
       console.log(err)
     })
 })
+
+app.put("api/favorite-things/increase-rank/:id", (req, res) => {})
 
 app.get("api/favorite-things/:id", (req, res) => {
   FavoriteThing.findById(req.params.id)
