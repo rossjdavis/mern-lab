@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/rossjdavis/mern-lab/issues"
   },
-  "homepage": "https://github.com/rossjdavis/mern-lab#readme"
+  "homepage": "https://github.com/rossjdavis/mern-lab#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.13.7"
+  }
 }

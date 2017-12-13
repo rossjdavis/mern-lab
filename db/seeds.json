@@ -1,0 +1,15 @@
+[
+  {
+    "description": "Apple MacBook Air 13.3-Inch Laptop",
+    "url":
+      "https://www.amazon.com/Apple-MacBook-13-3-Inch-Laptop-Capitan/dp/B015WXL0C6/ref=sr_1_1?s=pc&ie=UTF8&qid=1513179463&sr=1-1&keywords=macbook",
+    "image_url":
+      "https://images-na.ssl-images-amazon.com/images/I/81qonnN9cmL._SL1500_.jpg"
+  },
+  {
+    "description": "Ashton Lennox Duffel",
+    "url": "https://www.tumi.com/p/lenox-duffel-0333159GRY",
+    "image_url":
+      "https://tumi.scene7.com/is/image/Tumi/333159GRY_main?wid=800&layer=2&opac=0&layer=3&opac=0"
+  }
+]
