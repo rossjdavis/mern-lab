@@ -21,10 +21,8 @@ app.get("/api/favorite-things", (req, res) => {
 })
 
 app.post("/api/favorite-things", (req, res) => {
-  console.log(req.body)
   FavoriteThing.count({})
     .then(count => {
-      console.log(count)
       FavoriteThing.create({
         description: req.body.description,
         url: req.body.url,
@@ -43,10 +41,8 @@ app.put("/api/favorite-things/increase-rank/:id", (req, res) => {
   let currentRank = 0
   FavoriteThing.findById(req.params.id)
     .then(favoriteThing => {
-      console.log(`old item: ${favoriteThing.description}`)
       currentRank = favoriteThing.rank
       higherRank = (currentRank - 1)
-      console.log(`higher rank: ${higherRank}`)
       FavoriteThing.findOneAndUpdate(
         {rank: higherRank },
         {rank: currentRank},
@@ -60,10 +56,11 @@ app.put("/api/favorite-things/increase-rank/:id", (req, res) => {
         { new: true }
       )
     .then((updatedRecord) => {
-      console.log(updatedRecord)}
+      res.status(200).json(updatedRecord)
+    }
     )})})
     .catch((err) => {
-      console.log(err)
+      res.status(500).json({error: err})
     })
 })
 
@@ -88,10 +85,11 @@ app.put("/api/favorite-things/decrease-rank/:id", (req, res) => {
         { new: true }
       )
     .then((updatedRecord) => {
-      console.log(updatedRecord)}
+      res.status(200).json(updatedRecord)
+    }
     )})})
     .catch((err) => {
-      console.log(err)
+      res.status(500).json({error: err})
     })
 })
 
