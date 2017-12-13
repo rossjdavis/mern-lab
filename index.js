@@ -39,17 +39,35 @@ app.post("/api/favorite-things", (req, res) => {
     })
 })
 
-app.put("api/favorite-things/increase-rank/:id", (req, res) => {})
-
-app.get("api/favorite-things/:id", (req, res) => {
-  FavoriteThing.findById(req.params.id)
+app.put("api/favorite-things/increase-rank/:id", (req, res) => {
+  let currentRank
+  FavoriteThing.findById(req.params._id)
     .then(favoriteThing => {
-      res.json(favoriteThing)
+      currentRank = favoriteThing.rank
+      FavoriteThing.findOneAndUpdate(
+        { rank: currentRank + 1 },
+        { rank: currentRank },
+        { new: true }
+      )
     })
-    .catch(err => {
-      console.log(err)
+    .then(() => {
+      FavoriteThing.findOneAndUpdate(
+        { id: req.params._id },
+        { rank: currentRank + 1 },
+        { new: true }
+      )
     })
 })
+
+// app.get("api/favorite-things/:id", (req, res) => {
+//   FavoriteThing.findById(req.params.id)
+//     .then(favoriteThing => {
+//       res.json(favoriteThing)
+//     })
+//     .catch(err => {
+//       console.log(err)
+//     })
+// })
 
 app.listen(app.get("port"), () => {
   console.log("Lisening on port " + app.get("port"))
